@@ -2,6 +2,22 @@
 <html lang="en">
 <?php 
 require_once 'assets/includes/head.php';
+
+
+$jobid = $_GET['jobid'];
+
+$row = $pdo->read("jobs", ["job_id" => $jobid]);
+
+// Education
+$edu = $pdo->read("educations", ["edu_id" => $row[0]['education_id']]);
+
+// Location
+$city = $pdo->read("cities", ["city_id" => $row[0]['city_id']]);
+
+// Company
+$company = $pdo->read("companies", ["company_id" => $row[0]['company_id']]);
+
+$fetch_skills = $pdo->read("job_skills", ["job_id" => $jobid]);
 ?>
 
 <body>
@@ -16,7 +32,8 @@ require_once 'assets/includes/head.php';
 		?>
         <!-- Sub Visual of the page -->
         <div class="subvisual-block subvisual-theme-1 bg-dark-green d-flex pt-60 pt-md-90 pt-lg-150 pb-30 text-white">
-            <div class="pattern-image"><img src="assets/images/bg-pattern-overlay.jpg" width="1920" height="570" alt="Pattern">
+            <div class="pattern-image"><img src="assets/images/bg-pattern-overlay.jpg" width="1920" height="570"
+                    alt="Pattern">
             </div>
             <div class="container position-relative text-center">
                 <div class="row">
@@ -42,70 +59,72 @@ require_once 'assets/includes/head.php';
             <section
                 class="section section-job-details add-styles section-theme-1 pt-35 pt-md-50 pt-lg-75 pt-xl-100 pb-35 pb-md-50 pb-xl-100">
                 <div class="container">
+                    <?php
+      if (isset($_SESSION['msg'])) {
+        echo $_SESSION['msg'];
+        unset($_SESSION['msg']);
+      }
+      ?>
                     <header class="job-details-header mb-30 mb-md-45 mb-lg-60">
                         <ul class="post-meta">
-                            <li>By Develpersoft</li>
-                            <li><i class="icon icon-map-pin"></i><span class="text">Pekanbaru, Indonesia</span></li>
+                            <li>By <?php echo $company[0]['company_name']; ?></li>
+                            <li><i class="icon icon-map-pin"></i><span
+                                    class="text"><?php echo $city[0]['city_name']; ?></span></li>
                         </ul>
-                        <h2>Product Marketing Manager</h2>
-                        <div class="social-info">
-                            <strong class="title">Social Sharing:</strong>
-                            <ul class="social-networks">
-                                <li><a href="#"><i class="icon-facebook"></i></a></li>
-                                <li><a href="#"><i class="icon-linkedin"></i></a></li>
-                                <li><a href="#"><i class="icon-twitter"></i></a></li>
-                                <li><a href="#"><i class="icon-instagram"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="utility-buttons">
-                            <a href="#" class="btn-tag"><img src="assets/images/heart-filled-icon.svg" alt=""></a>
-                            <a href="#" class="btn-tag"><img src="assets/images/bookmark-black-icon.svg" alt=""></a>
-                        </div>
+                        <h2><?php echo $row[0]['job_title']; ?></h2>
+
+
                         <div class="company-info-job">
                             <ul class="job-info-list">
-                                <li>
-                                    <span class="text">Salary:</span>
-                                    <span class="text">0k-60k/year</span>
-                                </li>
-                                <li>
-                                    <span class="text">Expertise:</span>
-                                    <span class="text">Intermediate</span>
-                                </li>
+
+
                                 <li>
                                     <span class="text">Job Type:</span>
-                                    <span class="text">Fulltime, Parttime</span>
+                                    <span class="text"><?php echo $row[0]['type'] ?></span>
                                 </li>
-                                <li>
-                                    <span class="text">Experience:</span>
-                                    <span class="text">2 Years</span>
-                                </li>
+
                             </ul>
-                            <a href="#" class="btn btn-green btn-sm"><span class="btn-text">Apply Now</span></a>
+                            <?php
+                    if (isset($_SESSION['js_id'])) {
+                      $jobid = $_GET['jobid'];
+
+                      $row = $pdo->read("jobs", ["job_id" => $jobid]);
+
+                      $check_apply = $pdo->customQuery("SELECT * FROM jobs_applied WHERE job_id = '{$row[0]['job_id']}' AND seeker_id = '{$_SESSION['js_id']}'");
+
+
+                      if (count($check_apply) > 1 || count($check_apply) == 1) {
+
+                    ?>
+                            <a class="btn btn-danger btn-xs disabled">You Have Already Applied this Job.</a>
+                            <?php
+                      } else {
+                      ?>
+                            <a href="job-detail.php?jobid=<?php echo $row[0]['job_id']; ?>&jobapply=<?php echo $row[0]['job_id']; ?>"
+                                class="btn btn-green btn-sm"><span class="btn-text">Apply Now</span></a>
+
+
+
+                            <?php } ?>
+
+
+                            <?php
+                    } else {
+                    ?>
+                            <span>Login as a jobseeker for apply</span>
+
+                            <?php
+                    }
+
+                    ?>
                         </div>
                     </header>
                     <div class="row">
                         <div class="col-12">
-                            <div class="text-holder">
-                                <h3>Overview</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor in
-                                    magna aliqua. Ut enim ad minim veniam, quisoris nisi ut aliquip ex ea commodo con
-                                    dolor in reprehenderit in vol tate velit esse cillum dolore eu fugiat nulla
-                                    pariatur. Lor olor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt lab ma Ut enim ad minim veniam, quisderit in vol tate velit.magna aliqua.
-                                    Ut enim ad minim v dolor in reprehenderit in vol tate velit esse cillum dolore eu
-                                    fugiat nulla pariatur. Lor olor sit amet, consectetur adipiscing elit, sed do
-                                    eiusmod tempor incididunt lab ma Ut enim ad minim veniam, quisderit in vol tate
-                                    velit.</p>
-                                <p>dolor in reprehenderit in vol tate velit esse cillum dolore eu fugiat nulla pariatur.
-                                    Lor olor sit amet, <a href="#">consectetur adipiscing</a> elit, sed do eiusmod
-                                    tempor incididunt lab ma Ut enim ad minim veniam, quisderit in vol tate velit.</p>
-                            </div>
+
                             <div class="text-holder">
                                 <h3>Job Description</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor in
-                                    magna aliqua. Ut enim ad minim veniam, quisoris nisi ut <a href="#">aliquip ex ea
-                                        commodo con</a> dolor in reprehenderit in vol tate velit esse cillum dolore eu
-                                    fugiat nulla pariatur. Lor olor sit amet, consectetur adipiscing elit, </p>
+                                <p><?php echo $row[0]['description']; ?></p>
                             </div>
                             <div class="text-holder">
                                 <h3>Responsibilities</h3>
@@ -120,170 +139,26 @@ require_once 'assets/includes/head.php';
                             <div class="text-holder">
                                 <h3>Required Skills</h3>
                                 <ol class="num-list">
-                                    <li>Excellent IT skills, especially with design and photo-editing software.</li>
-                                    <li>Exceptional creativity and innovation.</li>
-                                    <li>Excellent time management and organisational skills.</li>
-                                    <li>Accuracy and attention to detail.</li>
-                                    <li>An understanding of the latest trends and their role within a commercial
-                                        environment.</li>
+                                    <?php
+                foreach ($fetch_skills as $skill) {
+                  $fetch_skill_names = $pdo->read("skills", ["skill_id" => $skill['skill_id']]);
+                  foreach ($fetch_skill_names as $name) {
+
+
+                ?>
+                                    <li><?php echo $name['skill_name']; ?></li>
+                                    <?php
+                  }
+                }
+                ?>
                                 </ol>
                             </div>
-                            <div class="text-holder">
-                                <h3>Benefits</h3>
-                                <ul class="bullet-list">
-                                    <li>Different types of job opportunities</li>
-                                    <li>Stable work hours.</li>
-                                    <li>Potential to work remotely.</li>
-                                    <li>Sense of accomplishment.</li>
-                                    <li>Income and benefits.</li>
-                                </ul>
-                            </div>
-                            <div class="text-holder note-box">
-                                <h3>Notes</h3>
-                                <p>office staff, admins, and field techs will be able to see that is specific to that
-                                    individual job where the note lives.</p>
-                            </div>
+
                         </div>
                     </div>
                 </div>
             </section>
-            <!-- Categories Block -->
-            <section
-                class="section section-theme-1 section-categories related-categories bg-light-sky pt-35 pt-md-50 pt-lg-65 pt-xl-80 pt-xxl-110 pb-35 pb-md-50 pb-lg-65 pb-xl-80 pb-xxl-110">
-                <div class="container">
-                    <div class="row justify-content-between mb-35 mb-lg-40">
-                        <div class="col-12 col-lg-8 col-xl-5">
-                            <!-- Section header -->
-                            <header class="section-header text-center text-lg-start mb-10 m-lg-0">
-                                <h2>Related Jobs</h2>
-                                <p>Most viewed and all-time top-selling services</p>
-                            </header>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="jobs-listing-slider">
-                                <div class="slick-slide">
-                                    <!-- Featured Category Box -->
-                                    <article class="featured-category-box">
-                                        <span class="tag">Intership</span>
-                                        <div class="img-holder">
-                                            <img src="assets/images/company-logo01.jpg" width="78" height="78"
-                                                alt="Financial Analyst">
-                                        </div>
-                                        <div class="textbox">
-                                            <strong class="h6">Financial Analyst</strong>
-                                            <span class="subtitle">By WebTechnology</span>
-                                            <address class="location"><i class="icon icon-map-pin"></i><span
-                                                    class="text">Pekanbaru, Indonesia</span></address>
-                                            <div class="job-info">
-                                                <span class="subtext">11 hours ago</span>
-                                                <span class="amount"><strong>$1000 - $1200</strong>/month</span>
-                                            </div>
-                                            <a href="#" class="btn btn-dark-yellow btn-sm"><span class="btn-text"><span
-                                                        class="text">Apple Now</span><i
-                                                        class="icon-chevron-right"></i></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                <div class="slick-slide">
-                                    <!-- Featured Category Box -->
-                                    <article class="featured-category-box">
-                                        <span class="tag">Part Time</span>
-                                        <div class="img-holder">
-                                            <img src="assets/images/company-logo02.jpg" width="78" height="78"
-                                                alt="Javascript Developer">
-                                        </div>
-                                        <div class="textbox">
-                                            <strong class="h6">Javascript Developer</strong>
-                                            <span class="subtitle">By Websikon</span>
-                                            <address class="location"><i class="icon icon-map-pin"></i><span
-                                                    class="text">Pekanbaru, Indonesia</span></address>
-                                            <div class="job-info">
-                                                <span class="subtext">11 hours ago</span>
-                                                <span class="amount"><strong>$1000 - $1200</strong>/month</span>
-                                            </div>
-                                            <a href="#" class="btn btn-dark-yellow btn-sm"><span class="btn-text"><span
-                                                        class="text">Apple Now</span><i
-                                                        class="icon-chevron-right"></i></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                <div class="slick-slide">
-                                    <!-- Featured Category Box -->
-                                    <article class="featured-category-box">
-                                        <span class="tag">Intership</span>
-                                        <div class="img-holder">
-                                            <img src="assets/images/company-logo03.jpg" width="78" height="78"
-                                                alt="Technical Writer">
-                                        </div>
-                                        <div class="textbox">
-                                            <strong class="h6">Technical Writer</strong>
-                                            <span class="subtitle">By Softy</span>
-                                            <address class="location"><i class="icon icon-map-pin"></i><span
-                                                    class="text">Pekanbaru, Indonesia</span></address>
-                                            <div class="job-info">
-                                                <span class="subtext">11 hours ago</span>
-                                                <span class="amount"><strong>$1000 - $1200</strong>/month</span>
-                                            </div>
-                                            <a href="#" class="btn btn-dark-yellow btn-sm"><span class="btn-text"><span
-                                                        class="text">Apple Now</span><i
-                                                        class="icon-chevron-right"></i></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                <div class="slick-slide">
-                                    <!-- Featured Category Box -->
-                                    <article class="featured-category-box">
-                                        <span class="tag">Full Time</span>
-                                        <div class="img-holder">
-                                            <img src="assets/images/company-logo04.jpg" width="78" height="78"
-                                                alt="Product Manager">
-                                        </div>
-                                        <div class="textbox">
-                                            <strong class="h6">Product Manager</strong>
-                                            <span class="subtitle">By Geniouslab</span>
-                                            <address class="location"><i class="icon icon-map-pin"></i><span
-                                                    class="text">Pekanbaru, Indonesia</span></address>
-                                            <div class="job-info">
-                                                <span class="subtext">11 hours ago</span>
-                                                <span class="amount"><strong>$1000 - $1200</strong>/month</span>
-                                            </div>
-                                            <a href="#" class="btn btn-dark-yellow btn-sm"><span class="btn-text"><span
-                                                        class="text">Apple Now</span><i
-                                                        class="icon-chevron-right"></i></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                                <div class="slick-slide">
-                                    <!-- Featured Category Box -->
-                                    <article class="featured-category-box">
-                                        <span class="tag">Full Time</span>
-                                        <div class="img-holder">
-                                            <img src="assets/images/company-logo05.jpg" width="78" height="78"
-                                                alt="Human Resources">
-                                        </div>
-                                        <div class="textbox">
-                                            <strong class="h6">Human Resources</strong>
-                                            <span class="subtitle">By Develpersoft</span>
-                                            <address class="location"><i class="icon icon-map-pin"></i><span
-                                                    class="text">Pekanbaru, Indonesia
-                                                </span></address>
-                                            <div class="job-info">
-                                                <span class="subtext">11 hours ago</span>
-                                                <span class="amount"><strong>$1000 - $1200</strong>/month</span>
-                                            </div>
-                                            <a href="#" class="btn btn-dark-yellow btn-sm"><span class="btn-text"><span
-                                                        class="text">Apple Now</span><i
-                                                        class="icon-chevron-right"></i></span></a>
-                                        </div>
-                                    </article>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+
         </main>
         <?php 
 		require_once 'assets/includes/footer.php';
@@ -292,6 +167,35 @@ require_once 'assets/includes/head.php';
     <?php 
 	require_once 'assets/includes/javascript.php';
 	?>
+    <?php
+  if (isset($_GET['jobapply'])) {
+    $job_id = $_GET['jobapply'];
+    $user_id = $_SESSION['js_id'];
+
+    $date = date("Y-m-d");
+
+    $pdo->create("jobs_applied", ['job_id' => $job_id, 'seeker_id' => $user_id, 'applied_at' => $date]);
+
+
+
+
+
+    $job = $pdo->read("jobs", "job_id = '$job_id'");
+
+    $company_id = $job[0]['company_id'];
+
+    $company = $pdo->read("companies", "company_id = '$company_id'");
+
+
+    $user = $pdo->read("jobseekers", "js_id = '$user_id'");
+
+    $_SESSION['msg'] = "<div class='alert alert-success'>Job Application Submitted Successfully!</div>";
+    echo "<script>
+    location.href = 'job-detail.php?jobid={$_GET['jobid']}'
+    </script>";
+  }
+
+  ?>
 </body>
 
 </html>
