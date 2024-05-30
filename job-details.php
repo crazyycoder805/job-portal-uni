@@ -100,7 +100,7 @@ $fetch_skills = $pdo->read("job_skills", ["job_id" => $jobid]);
                             <?php
                       } else {
                       ?>
-                            <a href="job-detail.php?jobid=<?php echo $row[0]['job_id']; ?>&jobapply=<?php echo $row[0]['job_id']; ?>"
+                            <a href="job-details.php?jobid=<?php echo $row[0]['job_id']; ?>&jobapply=<?php echo $row[0]['job_id']; ?>"
                                 class="btn btn-green btn-sm"><span class="btn-text">Apply Now</span></a>
 
 
@@ -180,18 +180,18 @@ $fetch_skills = $pdo->read("job_skills", ["job_id" => $jobid]);
 
 
 
-    $job = $pdo->read("jobs", "job_id = '$job_id'");
+    $job = $pdo->read("jobs", ["job_id" => $job_id]);
 
     $company_id = $job[0]['company_id'];
 
-    $company = $pdo->read("companies", "company_id = '$company_id'");
+    $company = $pdo->read("companies", ["company_id" => $company_id]);
 
 
-    $user = $pdo->read("jobseekers", "js_id = '$user_id'");
+    $user = $pdo->read("jobseekers", ["js_id" => $user_id]);
 
     $_SESSION['msg'] = "<div class='alert alert-success'>Job Application Submitted Successfully!</div>";
     echo "<script>
-    location.href = 'job-detail.php?jobid={$_GET['jobid']}'
+    location.href = 'job-details.php?jobid={$_GET['jobid']}'
     </script>";
   }
 

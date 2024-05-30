@@ -18,10 +18,15 @@
 
 
                     <li><a href="contact.php">Contact</a></li>
+                    <?php if (isset($_SESSION['company_id']) || isset($_SESSION['js_id'])) { ?>
+                        <li class="text-login"><a href="dashboard.php">My Panel</a></li>
+
+                        <?php } else { ?>
+
                     <li class="text-login"><a href="login.php">Login</a></li>
                     <li class="text-login"><a href="signup.php">Signup</a></li>
+                    <?php } ?>
                     <li class="text-login"><a href="jobs.php">Browse Jobs</a></li>
-
                     <!-- <li><a class="btn btn-green btn-sm" href="#"><span class="btn-text">Post a Job</span></a>
                     </li> -->
                 </ul>
