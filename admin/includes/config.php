@@ -2,4 +2,4 @@
 
 	ob_start();
 	session_start();
-	$connection = mysqli_connect("localhost", "root", "", "jp");
+	$connection = mysqli_connect("localhost", "root", "", "opb");
