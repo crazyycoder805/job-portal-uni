@@ -126,16 +126,7 @@ $fetch_skills = $pdo->read("job_skills", ["job_id" => $jobid]);
                                 <h3>Job Description</h3>
                                 <p><?php echo $row[0]['description']; ?></p>
                             </div>
-                            <div class="text-holder">
-                                <h3>Responsibilities</h3>
-                                <ul class="check-list">
-                                    <li>Targeted job titles are more effective than generic ones, so be precise</li>
-                                    <li>Provide an overview of your company and expectations</li>
-                                    <li>Job duties, job responsibilities</li>
-                                    <li>Cornerstone of the recruiting process</li>
-                                    <li>Written statement of educational qualifications</li>
-                                </ul>
-                            </div>
+
                             <div class="text-holder">
                                 <h3>Required Skills</h3>
                                 <ol class="num-list">

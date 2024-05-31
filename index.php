@@ -77,10 +77,8 @@ $jobs = $pdo->customQuery("SELECT * FROM jobs LIMIT 0, 5");
                             <article class="popular-jobs-box">
                                 <div class="box-holder">
                                     <div class="job-info">
-                                        <div class="img-holder">
-                                            <img src="assets/images/company-logo01.jpg" width="78" height="78"
-                                                alt="Image Description">
-                                        </div>
+                                        <br> <br>
+
                                         <div class="textbox">
                                             <h3 class="h5"><?php echo $jb['job_title'] ?></h3>
                                             <ul class="meta-list">
@@ -96,7 +94,8 @@ $jobs = $pdo->customQuery("SELECT * FROM jobs LIMIT 0, 5");
                                         </div>
                                     </div>
                                     <footer class="jobs-foot">
-                                        <a href="job-details.php?jobid=<?php echo $jb['job_id']; ?>" class="btn btn-green btn-sm"><span class="btn-text">Apply
+                                        <a href="job-details.php?jobid=<?php echo $jb['job_id']; ?>"
+                                            class="btn btn-green btn-sm"><span class="btn-text">Apply
                                                 Now</span></a>
                                     </footer>
                                 </div>

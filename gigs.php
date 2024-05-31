@@ -6,7 +6,7 @@ require_once 'assets/includes/head.php';
 ?>
 
 <?php 
-$jobs = $pdo->read("jobs");
+$gigs = $pdo->read("gigs");
 
 ?>
 
@@ -50,23 +50,21 @@ $jobs = $pdo->read("jobs");
 
 
                             <div class="row justify-content-center">
-                                <?php foreach ($jobs as $jb) {
-                                                            $company = $pdo->read("companies", ['company_id' => $jb['company_id']]);
-                                                            $city = $pdo->read("cities", ['city_id' => $jb['company_id']]);
+                                <?php foreach ($gigs as $gg) {
+                        
                                 ?>
                                 <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-15 mb-md-30">
                                     <article class="featured-category-box">
-                                        <span class="tag"><?php echo $jb['type'] ?></span>
-                                     <br>                                     <br>
-
+                                        <span class="tag">PKR - <?php echo $gg['price'] ?></span>
+                                        <br><br>
                                         <div class="textbox">
-                                            <strong class="h6"><?php echo $jb['job_title'] ?></strong>
-                                            <span class="subtitle"><?php echo $company[0]['company_name']; ?></span>
+                                            <strong class="h6"><?php echo $gg['title'] ?></strong>
                                             <address class="location"><i class="icon icon-map-pin"></i><span
-                                                    class="text"><?php echo $city[0]['city_name'] ?></span></address>
+                                                    class="text"><?php echo $gg['description'] ?></span></address>
 
-                                            <a href="job-details.php?jobid=<?php echo $jb['job_id']; ?>" class="btn btn-dark-yellow btn-sm"><span
-                                                    class="btn-text"><span class="text">Apple Now</span><i
+                                            <a href="gig-details.php?gid=<?php echo $gg['id']; ?>"
+                                                class="btn btn-dark-yellow btn-sm"><span class="btn-text"><span
+                                                        class="text">Buy</span><i
                                                         class="icon-chevron-right"></i></span></a>
                                         </div>
                                     </article>
