@@ -2,8 +2,8 @@
     <div class="container">
         <strong class="logo">
             <a href="index.php">
-                <span class="normal-logo">Skill Sphare X</span>
-                <span class="sticky-logo">Skill Sphare X</span>
+                <span class="normal-logo">Skill Sphere X</span>
+                <span class="sticky-logo">Skill Sphere X</span>
 
             </a>
         </strong>

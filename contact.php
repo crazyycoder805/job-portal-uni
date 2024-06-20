@@ -112,7 +112,7 @@ require_once 'assets/includes/head.php';
                                             <h3 class="h4">Email Address:</h3>
                                             <p>
                                                 Responsive within 1-2 business days<br>
-                                                <a href="mailto:support@spharex.com">support@spharex.com</a>
+                                                <a href="mailto:support@Spherex.com">support@Spherex.com</a>
                                             </p>
                                         </div>
                                     </div>

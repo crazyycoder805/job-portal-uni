@@ -60,7 +60,7 @@ if (isset($_POST['company'])) {
         
         $_SESSION['company_id'] = $company_id;
 
-        header("Location: dashboard.php");
+        header("Location: index.php");
 
       } else {
 
@@ -130,7 +130,7 @@ if (isset($_POST['company'])) {
 							                    
 							                    $_SESSION['js_id'] = $js_id;
 
-							                    header("Location: dashboard.php");
+							                    header("Location: index.php");
 
 							                  } else {
 

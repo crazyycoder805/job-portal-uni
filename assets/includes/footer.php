@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-12 col-lg-3 mb-md-15 mb-lg-0">
                         <strong class="logo">
-                            <a href="index.php">Skill Sphare X</a>
+                            <a href="index.php">Skill Sphere X</a>
                         </strong>
                     </div>
                     <div class="col-12 col-lg-9">
@@ -42,7 +42,7 @@
                                 <li>
                                     <i class="icon-mail"></i>
                                     <span class="text"><a
-                                            href="mailto:support@spharex.com">support@spharex.com</a></span>
+                                            href="mailto:support@Spherex.com">support@Spherex.com</a></span>
                                 </li>
                             </ul>
                         </div>
@@ -69,7 +69,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-12 col-md-8 mb-15 mb-md-0">
-                    <p>Copyright © 2024 by <a class="site-link" href="#">Skill Sphare X</a> All Rights
+                    <p>Copyright © 2024 by <a class="site-link" href="#">Skill Sphere X</a> All Rights
                         Reserved.</p>
                 </div>
                 
